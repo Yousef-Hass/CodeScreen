@@ -1,0 +1,5 @@
+# Dependencies required for test.
+
+pytest==7.2.1
+pytest-timeout==2.1.0
+typing-extensions==4.4.0
