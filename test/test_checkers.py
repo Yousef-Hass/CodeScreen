@@ -1,5 +1,7 @@
 import pytest
 from src.board import Board
+import pdb
+
 
 class TestBoard:
     def setup(self):
@@ -8,7 +10,7 @@ class TestBoard:
     def test_initialization(self):
         assert self.board.get_piece_at((0, 0)) == 'b'
         assert self.board.get_piece_at((0, 1)) is None
-        assert self.board.get_piece_at((7, 7)) == 'w'
+        assert self.board.get_piece_at((7, 7)) == "w"
         assert self.board.get_piece_at((7, 6)) is None
 
     def test_move(self):
@@ -24,7 +26,7 @@ class TestBoard:
 
         self.board.move((5, 1), (4, 0))  # valid move
         assert self.board.get_piece_at((5, 1)) is None
-        assert self.board.get_piece_at((4, 0)) == 'w'
+        assert self.board.get_piece_at((4, 0)) == "w"
 
     def test_capture(self):
         # Arrange the board in a way that allows for a capture
@@ -34,11 +36,12 @@ class TestBoard:
 
         with pytest.raises(ValueError):
             self.board.move((5, 7), (4, 6))  # Forced capture test
+        pdb.set_trace()
 
         self.board.move((4, 0), (2, 2))  # white captures black
         assert self.board.get_piece_at((3, 1)) is None  # captured piece is removed
         assert self.board.get_piece_at((4, 0)) is None
-        assert self.board.get_piece_at((2, 2)) == 'w'
+        assert self.board.get_piece_at((2, 2)) == "w"
 
     def test_becoming_king(self):
         # Arrange the board in a way that allows for a piece to become a king
@@ -55,6 +58,6 @@ class TestBoard:
         self.board.move((5, 5), (4, 6))  # valid move for white
 
         self.board.move((3, 7), (5, 5))  # black double jump
-        self.board.move((5, 5), (7, 3))  
+        self.board.move((5, 5), (7, 3))
 
-        assert self.board.get_piece_at((7, 3)) == 'bK'
+        assert self.board.get_piece_at((7, 3)) == "bK"
